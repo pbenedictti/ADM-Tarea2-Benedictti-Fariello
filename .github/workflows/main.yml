@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew --configuration-cache build sonar -Dsonar.branch.name=master --info
 
       - name: Verificar estado del Quality Gate en SonarCloud
-        uses: sonarsource/sonarqube-quality-gate-action@v2
+        uses: sonarsource/sonarqube-quality-gate-action@master
         with:
           scanMetadataReportFile: build/sonar/report-task.txt
         env:
