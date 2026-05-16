@@ -29,8 +29,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.7'
-          bundler: '4.0.6'
           bundler-cache: true
+
+      - name: Instalar versión exacta de Bundler y dependencias
+        run: |
+          gem install bundler:4.0.6
+          bundle config set --local path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
 
       - name: Instalar plugins de Fastlane
         run: bundle exec fastlane install_plugins
