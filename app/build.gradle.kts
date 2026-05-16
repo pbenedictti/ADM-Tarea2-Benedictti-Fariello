@@ -82,6 +82,6 @@ sonar {
         property("sonar.projectKey", "adm-tarea2")
         property("sonar.projectName", "ADM Tarea2")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.organization", "ADM Tarea2")
+        property("sonar.organization", "adm-tarea2")
     }
 }
