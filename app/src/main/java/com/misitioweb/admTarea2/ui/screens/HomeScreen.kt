@@ -39,7 +39,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 .height(240.dp)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(Color(0xFF673AB7), Color(0xFF3F51B5))
+                        colors = listOf(Color(0xFFF2C4CE), Color(0xFF8458E7))
                     )
                 ),
             contentAlignment = Alignment.Center
@@ -130,7 +130,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                         navController.navigate(Screen.Results.route)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB39DDB)),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
                     shape = RoundedCornerShape(24.dp)
                 ) {
                     Text("Buscar", color = Color.White)
