@@ -16,6 +16,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+enum class SearchType {
+    TITLE, AUTHOR
+}
+
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: BookRepository
@@ -28,6 +32,9 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
+
+    private val _searchType = MutableStateFlow(SearchType.TITLE)
+    val searchType: StateFlow<SearchType> = _searchType
 
     private val _isDarkMode = MutableStateFlow(false)
     val isDarkMode: StateFlow<Boolean> = _isDarkMode
@@ -56,6 +63,10 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         _searchQuery.value = query
     }
 
+    fun onSearchTypeChange(type: SearchType) {
+        _searchType.value = type
+    }
+
     fun searchBooks() {
         val query = _searchQuery.value
         if (query.isBlank()) return
@@ -63,7 +74,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                val response = repository.searchBooks(query)
+                val response = repository.searchBooks(query, _searchType.value == SearchType.TITLE)
                 _searchResults.value = response.docs
                 
                 // Start Service

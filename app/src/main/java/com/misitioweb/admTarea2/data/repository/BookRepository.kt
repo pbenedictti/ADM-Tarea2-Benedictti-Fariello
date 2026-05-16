@@ -10,8 +10,12 @@ class BookRepository(
     private val api: OpenLibraryApi,
     private val dao: BookDao
 ) {
-    suspend fun searchBooks(query: String): SearchResponse {
-        return api.searchBooks(query)
+    suspend fun searchBooks(query: String, searchByTitle: Boolean): SearchResponse {
+        return if (searchByTitle) {
+            api.searchBooks(title = query)
+        } else {
+            api.searchBooks(author = query)
+        }
     }
 
     fun getFavorites(): Flow<List<BookEntity>> {
