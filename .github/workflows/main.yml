@@ -23,11 +23,12 @@ jobs:
       - name: Build, ejecucion de tests y Escaneo en SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonar --info
+        run: ./gradlew --configuration-cache build sonar -Dsonar.branch.name=master --info
 
       - name: Verificar estado del Quality Gate en SonarCloud
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
+        uses: sonarsource/sonarqube-quality-gate-action@v2
+        with:
+          scanMetadataReportFile: build/sonar/report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
