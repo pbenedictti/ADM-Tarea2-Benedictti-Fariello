@@ -83,6 +83,6 @@ sonar {
         property("sonar.projectName", "ADM Tarea2")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.organization", "ADM Tarea2")
-        property("sonar.sources", "app/src/main/java")
+        property("sonar.sources", "/src/main/java")
     }
 }
