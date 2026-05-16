@@ -1,0 +1,56 @@
+name: CI/CD Pipeline con SonarCloud y Fastlane
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-analyze-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build, ejecucion de tests y Escaneo en SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonar --info
+
+      - name: Verificar estado del Quality Gate en SonarCloud
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Setup Ruby / Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install fastlane
+          fastlane install_plugins
+
+      - name: Install specific Bundler version
+        run: gem install bundler:4.0.6
+
+      - name: Instalar Dependencias
+        run: bundle install
+
+      - name: Create credentials file
+        run: echo '${{ secrets.FIREBASE_KEY_JSON }}' > firebase-key.json
+
+      - name: Deploy to Firebase
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        run: bundle exec fastlane distribute
