@@ -1,4 +1,4 @@
-package com.adm.adm_tarea2.ui.theme
+package com.misitioweb.admTarea2.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

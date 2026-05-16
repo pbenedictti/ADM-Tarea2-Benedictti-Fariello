@@ -1,4 +1,4 @@
-package com.adm.adm_tarea2
+package com.misitioweb.admTarea2
 
 import org.junit.Test
 
