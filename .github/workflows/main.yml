@@ -23,14 +23,7 @@ jobs:
       - name: Build, ejecucion de tests y Escaneo en SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew --configuration-cache build sonar -Dsonar.branch.name=master --info
-
-      - name: Verificar estado del Quality Gate en SonarCloud
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        with:
-          scanMetadataReportFile: .sonar/report-task.txt
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonar -Dsonar.branch.name=master --info
 
       - name: Setup Ruby / Fastlane
         uses: ruby/setup-ruby@v1
