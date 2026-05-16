@@ -28,24 +28,17 @@ jobs:
       - name: Setup Ruby / Fastlane
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'
+          ruby-version: '3.0.7'
+          bundler: '4.0.6'
           bundler-cache: true
 
-      - name: Install dependencies
-        run: |
-          gem install fastlane
-          fastlane install_plugins
+      - name: Instalar plugins de Fastlane
+        run: bundle exec fastlane install_plugins
 
-      - name: Install specific Bundler version
-        run: gem install bundler:4.0.6
-
-      - name: Instalar Dependencias
-        run: bundle install
-
-      - name: Create credentials file
+      - name: Crear archivo de credenciales
         run: echo '${{ secrets.FIREBASE_KEY_JSON }}' > firebase-key.json
 
-      - name: Deploy to Firebase
+      - name: Desplegar en Firebase
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
         run: bundle exec fastlane distribute
