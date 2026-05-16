@@ -1,0 +1,44 @@
+name: CI/CD Pipeline con SonarCloud y Fastlane
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-analyze-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Build, ejecucion de tests y Escaneo en SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonar -Dsonar.branch.name=master --info
+
+      - name: Setup Ruby / Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.7'
+          bundler: '4.0.6'
+          bundler-cache: true
+
+      - name: Instalar plugins de Fastlane
+        run: bundle exec fastlane install_plugins
+
+      - name: Crear archivo de credenciales
+        run: echo '${{ secrets.FIREBASE_KEY_JSON }}' > firebase-key.json
+
+      - name: Desplegar en Firebase
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        run: bundle exec fastlane distribute

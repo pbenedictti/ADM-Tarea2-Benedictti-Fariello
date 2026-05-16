@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "108925810994",
+    "project_id": "adm-tarea2",
+    "storage_bucket": "adm-tarea2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108925810994:android:fe90a21eb57169ce3e3f2b",
+        "android_client_info": {
+          "package_name": "com.misitioweb.admTarea2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq1erlTKsQiJmNNX6pHjhzI__8WVsKqRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

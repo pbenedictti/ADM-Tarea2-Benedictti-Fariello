@@ -1,0 +1,37 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Corre los tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Compila y sube la app a Firebase"
+    lane :distribute do
+      # 1. Compila el APK
+      gradle(task: "assembleDebug")
+
+      # 2. Sube a Firebase usando archivo archivo de credenciales
+      firebase_app_distribution(
+          app: ENV["FIREBASE_APP_ID"],
+          service_credentials_file: "firebase-key.json",
+          groups: "testers-buscador",
+          release_notes: "Nueva versión"
+      )
+    end
+end

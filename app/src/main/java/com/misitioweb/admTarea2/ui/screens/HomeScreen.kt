@@ -9,9 +9,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LibraryBooks
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -22,10 +20,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.misitioweb.admTarea2.ui.BookViewModel
 import com.misitioweb.admTarea2.ui.Screen
+import com.misitioweb.admTarea2.ui.SearchType
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
     val searchQuery by viewModel.searchQuery.collectAsState()
+    val searchType by viewModel.searchType.collectAsState()
+    var expanded by remember { mutableStateOf(false) }
+
+    val placeholderText = if (searchType == SearchType.TITLE) "Buscar por título..." else "Buscar por autor..."
+    val dropdownText = if (searchType == SearchType.TITLE) "Buscar por: Título" else "Buscar por: Autor"
 
     Column(
         modifier = Modifier
@@ -93,7 +98,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 OutlinedTextField(
                     value = searchQuery,
                     onValueChange = { viewModel.onSearchQueryChange(it) },
-                    placeholder = { Text("Buscar por título...") },
+                    placeholder = { Text(placeholderText) },
                     leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
@@ -107,18 +112,46 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Dropdown placeholder (Simplified)
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    color = Color(0xFFF3E5F5)
+                // Dropdown
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = { expanded = it },
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Row(
-                        modifier = Modifier.padding(12.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
+                        shape = RoundedCornerShape(12.dp),
+                        color = Color(0xFFF3E5F5)
                     ) {
-                        Text("Buscar por: Título", modifier = Modifier.weight(1f))
-                        Icon(Icons.Default.ChevronRight, contentDescription = null)
+                        Row(
+                            modifier = Modifier.padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(dropdownText, modifier = Modifier.weight(1f))
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                        }
+                    }
+
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text("Título") },
+                            onClick = {
+                                viewModel.onSearchTypeChange(SearchType.TITLE)
+                                expanded = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text("Autor") },
+                            onClick = {
+                                viewModel.onSearchTypeChange(SearchType.AUTHOR)
+                                expanded = false
+                            }
+                        )
                     }
                 }
 

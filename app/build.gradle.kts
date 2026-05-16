@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    id("org.sonarqube") version "7.3.0.8198"
 }
 
 android {
@@ -74,4 +75,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "adm-tarea2")
+        property("sonar.projectName", "ADM Tarea2")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.organization", "adm-tarea2")
+    }
 }

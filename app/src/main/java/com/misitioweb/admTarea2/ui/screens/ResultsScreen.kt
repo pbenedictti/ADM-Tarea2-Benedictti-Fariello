@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.misitioweb.admTarea2.ui.BookViewModel
+import com.misitioweb.admTarea2.ui.SearchType
 import com.misitioweb.admTarea2.ui.components.BookItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,7 +25,10 @@ fun ResultsScreen(navController: NavController, viewModel: BookViewModel) {
     val results by viewModel.searchResults.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
+    val searchType by viewModel.searchType.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
+
+    val searchLabel = if (searchType == SearchType.TITLE) "(título)" else "(autor)"
 
     Scaffold(
         topBar = {
@@ -32,7 +36,7 @@ fun ResultsScreen(navController: NavController, viewModel: BookViewModel) {
                 title = {
                     Column {
                         Text("Resultados", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                        Text("$searchQuery (autor)", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("$searchQuery $searchLabel", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
                 navigationIcon = {
