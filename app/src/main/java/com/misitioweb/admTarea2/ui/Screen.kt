@@ -7,8 +7,10 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(val route: String, val title: String, val icon: ImageVector) {
+    object Splash : Screen("splash", "Inicio", Icons.Default.Search)
     object Search : Screen("search", "Buscar", Icons.Default.Search)
     object Results : Screen("results", "Resultados", Icons.Default.Search)
     object Favorites : Screen("favorites", "Favoritos", Icons.Default.Favorite)
     object Settings : Screen("settings", "Configuración", Icons.Default.Settings)
+
 }
