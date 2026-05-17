@@ -1,10 +1,9 @@
 package com.misitioweb.admTarea2.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.automirrored.filled.LibraryBooks
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -12,10 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.misitioweb.admTarea2.R
 import com.misitioweb.admTarea2.ui.Screen
 import kotlinx.coroutines.delay
 
@@ -63,20 +64,11 @@ fun SplashScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 // Icono de librería
-                Surface(
-                    modifier = Modifier.size(80.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    color = Color(0xFF9C27B0)
-                ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.LibraryBooks,
+                Image(
+                    painter = painterResource(id = R.drawable.ic_launcher_foreground_image),
                     contentDescription = "Biblioteca",
-                        tint = Color(0xFF673AB7),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp)
-                    )
-                }
+                    modifier = Modifier.size(450.dp)
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 

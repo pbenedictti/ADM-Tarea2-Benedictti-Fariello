@@ -31,7 +31,7 @@ fun FavoritesScreen(navController: NavController, viewModel: BookViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF8F8F8))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         // Header
         Box(
@@ -112,13 +112,13 @@ fun EmptyFavorites(navController: NavController) {
     ) {
         Surface(
             shape = RoundedCornerShape(50),
-            color = Color(0xFFF3E5F5),
+            color = MaterialTheme.colorScheme.primaryContainer,
             modifier = Modifier.size(100.dp)
         ) {
             Icon(
                 imageVector = Icons.Default.LibraryBooks,
                 contentDescription = null,
-                tint = Color(0xFF673AB7),
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(24.dp)
             )
         }
@@ -126,22 +126,23 @@ fun EmptyFavorites(navController: NavController) {
         Text(
             text = "Sin favoritos",
             fontSize = 18.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "Aún no has guardado ningún libro. Explora y guarda tus favoritos.",
             fontSize = 14.sp,
-            color = Color.Gray,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = androidx.compose.ui.text.style.TextAlign.Center
         )
         Spacer(modifier = Modifier.height(32.dp))
         Button(
             onClick = { navController.navigate(Screen.Search.route) },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             shape = RoundedCornerShape(24.dp)
         ) {
-            Text("Buscar libros", color = Color.White)
+            Text("Buscar libros", color = MaterialTheme.colorScheme.onPrimary)
         }
     }
 }

@@ -43,6 +43,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
 
     fun toggleDarkMode(enabled: Boolean) {
         _isDarkMode.value = enabled
+
     }
 
     init {
