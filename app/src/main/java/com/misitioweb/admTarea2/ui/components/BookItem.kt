@@ -29,7 +29,7 @@ fun BookItem(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
@@ -54,7 +54,8 @@ fun BookItem(
                     text = title,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    maxLines = 2
+                    maxLines = 2,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = author,
@@ -72,7 +73,7 @@ fun BookItem(
                 Icon(
                     imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = if (isFavorite) "Quitar de favoritos" else "Agregar a favoritos",
-                    tint = if (isFavorite) Color(0xFF673AB7) else Color.Gray
+                    tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline
                 )
             }
         }

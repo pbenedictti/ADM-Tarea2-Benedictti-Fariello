@@ -35,7 +35,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF8F8F8))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         // Header with Gradient
         Box(
@@ -44,7 +44,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 .height(240.dp)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(Color(0xFF673AB7), Color(0xFF3F51B5))
+                        colors = listOf(Color(0xFFF2C4CE), Color(0xFF8458E7))
                     )
                 ),
             contentAlignment = Alignment.Center
@@ -84,7 +84,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 .offset(y = (-40).dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
@@ -92,6 +92,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                     text = "Buscar libros",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
                 
@@ -103,8 +104,8 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = Color(0xFFF3E5F5),
-                        unfocusedContainerColor = Color(0xFFF3E5F5),
+                        focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                         focusedBorderColor = Color.Transparent,
                         unfocusedBorderColor = Color.Transparent
                     )
@@ -123,13 +124,17 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                             .fillMaxWidth()
                             .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
                         shape = RoundedCornerShape(12.dp),
-                        color = Color(0xFFF3E5F5)
+                        color = MaterialTheme.colorScheme.surfaceVariant
                     ) {
                         Row(
                             modifier = Modifier.padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(dropdownText, modifier = Modifier.weight(1f))
+                            Text(
+                                dropdownText, 
+                                modifier = Modifier.weight(1f),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                         }
                     }
@@ -163,7 +168,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                         navController.navigate(Screen.Results.route)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB39DDB)),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
                     shape = RoundedCornerShape(24.dp)
                 ) {
                     Text("Buscar", color = Color.White)
@@ -177,7 +182,9 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFFFCE4EC)),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
+            ),
             onClick = { navController.navigate(Screen.Favorites.route) }
         ) {
             Row(
@@ -201,15 +208,15 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                     Text(
                         text = "Mis Favoritos",
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF880E4F)
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                     Text(
                         text = "Ver libros guardados",
                         fontSize = 12.sp,
-                        color = Color(0xFFAD1457)
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                     )
                 }
-                Icon(Icons.Default.ChevronRight, contentDescription = null, tint = Color(0xFFAD1457))
+                Icon(Icons.Default.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSecondaryContainer)
             }
         }
     }

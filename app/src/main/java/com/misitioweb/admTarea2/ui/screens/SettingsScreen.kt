@@ -26,7 +26,7 @@ fun SettingsScreen(navController: androidx.navigation.NavController, viewModel: 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF8F8F8))
+            .background(MaterialTheme.colorScheme.background)
     ) {
         // Header
         Box(
@@ -72,7 +72,12 @@ fun SettingsScreen(navController: androidx.navigation.NavController, viewModel: 
         }
 
         Column(modifier = Modifier.padding(24.dp)) {
-            Text(text = "Apariencia", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+            Text(
+                text = "Apariencia", 
+                fontSize = 14.sp, 
+                fontWeight = FontWeight.Bold, 
+                color = MaterialTheme.colorScheme.primary
+            )
             Spacer(modifier = Modifier.height(16.dp))
             
             SettingsItem(
@@ -88,7 +93,12 @@ fun SettingsScreen(navController: androidx.navigation.NavController, viewModel: 
             )
 
             Spacer(modifier = Modifier.height(32.dp))
-            Text(text = "Acerca de", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+            Text(
+                text = "Acerca de", 
+                fontSize = 14.sp, 
+                fontWeight = FontWeight.Bold, 
+                color = MaterialTheme.colorScheme.primary
+            )
             Spacer(modifier = Modifier.height(16.dp))
 
             SettingsItem(title = "Versión", subtitle = "1.0.0", icon = Icons.Default.Info)
@@ -110,7 +120,7 @@ fun SettingsItem(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -118,20 +128,29 @@ fun SettingsItem(
         ) {
             Surface(
                 shape = RoundedCornerShape(50),
-                color = Color(0xFFF3E5F5),
+                color = MaterialTheme.colorScheme.secondaryContainer,
                 modifier = Modifier.size(40.dp)
             ) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
-                    tint = Color(0xFF673AB7),
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(8.dp)
                 )
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                Text(text = subtitle, fontSize = 12.sp, color = Color.Gray)
+                Text(
+                    text = title, 
+                    fontWeight = FontWeight.Bold, 
+                    fontSize = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = subtitle, 
+                    fontSize = 12.sp, 
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
             trailing?.invoke()
         }

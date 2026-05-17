@@ -86,7 +86,7 @@ fun MainApp(viewModel: BookViewModel) {
                 FavoritesScreen(navController, viewModel)
             }
             composable(Screen.Settings.route) {
-                SettingsScreen(navController)
+                SettingsScreen(navController, viewModel)
             }
         }
     }
