@@ -24,7 +24,7 @@ platform :android do
   desc "Compila y sube la app a Firebase"
     lane :distribute do
       # 1. Compila el APK
-      gradle(task: "assembleDebug")
+      gradle(task: "clean assembleDebug")
 
       # 2. Sube a Firebase usando archivo archivo de credenciales
       firebase_app_distribution(
