@@ -39,7 +39,7 @@
 
         <provider
             android:name=".components.BookProvider"
-            android:authorities="com.misitioweb.admTarea2.provider"
+            android:authorities="${applicationId}.provider"
             android:exported="true" />
     </application>
 
