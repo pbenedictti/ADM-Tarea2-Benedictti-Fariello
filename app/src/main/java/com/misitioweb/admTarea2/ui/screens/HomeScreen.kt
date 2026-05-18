@@ -29,8 +29,16 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
     val searchType by viewModel.searchType.collectAsState()
     var expanded by remember { mutableStateOf(false) }
 
-    val placeholderText = if (searchType == SearchType.TITLE) "Buscar por título..." else "Buscar por autor..."
-    val dropdownText = if (searchType == SearchType.TITLE) "Buscar por: Título" else "Buscar por: Autor"
+    val placeholderText = when (searchType) {
+        SearchType.TITLE -> "Buscar por título..."
+        SearchType.AUTHOR -> "Buscar por autor..."
+        SearchType.ISBN -> "Buscar por ISBN..."
+    }
+    val dropdownText = when (searchType) {
+        SearchType.TITLE -> "Buscar por: Título"
+        SearchType.AUTHOR -> "Buscar por: Autor"
+        SearchType.ISBN -> "Buscar por: ISBN"
+    }
 
     Column(
         modifier = Modifier
@@ -154,6 +162,13 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                             text = { Text("Autor") },
                             onClick = {
                                 viewModel.onSearchTypeChange(SearchType.AUTHOR)
+                                expanded = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text("ISBN") },
+                            onClick = {
+                                viewModel.onSearchTypeChange(SearchType.ISBN)
                                 expanded = false
                             }
                         )

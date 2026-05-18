@@ -4,17 +4,18 @@ import com.misitioweb.admTarea2.data.local.BookDao
 import com.misitioweb.admTarea2.data.local.BookEntity
 import com.misitioweb.admTarea2.data.remote.OpenLibraryApi
 import com.misitioweb.admTarea2.data.remote.SearchResponse
+import com.misitioweb.admTarea2.ui.SearchType
 import kotlinx.coroutines.flow.Flow
 
 class BookRepository(
     private val api: OpenLibraryApi,
     private val dao: BookDao
 ) {
-    suspend fun searchBooks(query: String, searchByTitle: Boolean): SearchResponse {
-        return if (searchByTitle) {
-            api.searchBooks(title = query)
-        } else {
-            api.searchBooks(author = query)
+    suspend fun searchBooks(query: String, searchType: SearchType): SearchResponse {
+        return when (searchType) {
+            SearchType.TITLE -> api.searchBooks(title = query)
+            SearchType.AUTHOR -> api.searchBooks(author = query)
+            SearchType.ISBN -> api.searchBooks(isbn = query)
         }
     }
 

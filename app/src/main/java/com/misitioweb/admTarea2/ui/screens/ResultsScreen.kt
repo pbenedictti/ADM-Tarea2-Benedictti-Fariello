@@ -28,7 +28,11 @@ fun ResultsScreen(navController: NavController, viewModel: BookViewModel) {
     val searchType by viewModel.searchType.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
 
-    val searchLabel = if (searchType == SearchType.TITLE) "(título)" else "(autor)"
+    val searchLabel = when (searchType) {
+        SearchType.TITLE -> "(título)"
+        SearchType.AUTHOR -> "(autor)"
+        SearchType.ISBN -> "(ISBN)"
+    }
 
     Scaffold(
         topBar = {

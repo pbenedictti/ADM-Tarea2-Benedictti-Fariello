@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 enum class SearchType {
-    TITLE, AUTHOR
+    TITLE, AUTHOR, ISBN
 }
 
 class BookViewModel(application: Application) : AndroidViewModel(application) {
@@ -75,7 +75,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                val response = repository.searchBooks(query, _searchType.value == SearchType.TITLE)
+                val response = repository.searchBooks(query, _searchType.value)
                 _searchResults.value = response.docs
                 
                 // Start Service

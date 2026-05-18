@@ -7,7 +7,8 @@ interface OpenLibraryApi {
     @GET("search.json")
     suspend fun searchBooks(
         @Query("title") title: String? = null,
-        @Query("author") author: String? = null
+        @Query("author") author: String? = null,
+        @Query("isbn") isbn: String? = null
     ): SearchResponse
 
     companion object {
