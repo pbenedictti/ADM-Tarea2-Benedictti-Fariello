@@ -13,6 +13,8 @@ import com.misitioweb.admTarea2.data.remote.OpenLibraryApi
 import com.misitioweb.admTarea2.data.repository.BookRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -47,15 +49,30 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     init {
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .header("User-Agent", "AdmTarea2App/1.0")
+                    .build()
+                chain.proceed(request)
+            }
+            .addInterceptor(logging)
+            .build()
+
         val api = Retrofit.Builder()
             .baseUrl(OpenLibraryApi.BASE_URL)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(OpenLibraryApi::class.java)
-        
+
         val dao = BookDatabase.getDatabase(application).bookDao()
         repository = BookRepository(api, dao)
-        
+
         favorites = repository.getFavorites()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
     }
