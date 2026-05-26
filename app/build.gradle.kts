@@ -3,6 +3,20 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     id("org.sonarqube") version "7.3.0.8198"
+    id("org.owasp.dependencycheck") version "12.1.0"
+}
+
+dependencyCheck {
+    formats = listOf("HTML", "JSON")
+    outputDirectory = "${layout.buildDirectory.get().asFile}/reports/dependency-check"
+    autoUpdate = true
+    failBuildOnCVSS = 7.0f
+    
+    suppressionFile = "${project.projectDir}/suppressions.xml" //Evitar errores de Android, Google y kotlin que no podemos arreglar
+    
+    analyzers {
+        ossIndexEnabled = false
+    }
 }
 
 android {

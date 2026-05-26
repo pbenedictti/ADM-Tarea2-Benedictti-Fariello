@@ -198,7 +198,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer
+                containerColor = Color(0xFFFDD6E2) // MaterialTheme.colorScheme.secondaryContainer
             ),
             onClick = { navController.navigate(Screen.Favorites.route) }
         ) {

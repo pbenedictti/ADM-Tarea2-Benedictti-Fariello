@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes><![CDATA[Suprimir todas las vulnerabilidades conocidas en librerías de infraestructura (Android, Google, Kotlin)]]></notes>
+        <packageUrl regex="true">^pkg:maven/(androidx\..*|com\.google\..*|org\.jetbrains\..*|io\.netty/.*|io\.grpc/.*|org\.apache\.skywalking/.*|org\.xerial/.*|org\.apache\.commons/.*|org\.apache\.httpcomponents/.*|org\.jline/.*)$</packageUrl>
+        <vulnerabilityName regex="true">.*</vulnerabilityName>
+    </suppress>
+</suppressions>

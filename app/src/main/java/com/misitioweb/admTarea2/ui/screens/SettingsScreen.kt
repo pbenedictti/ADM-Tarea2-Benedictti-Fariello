@@ -35,7 +35,7 @@ fun SettingsScreen(navController: androidx.navigation.NavController, viewModel: 
                 .height(200.dp)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(Color(0xFF673AB7), Color(0xFF3F51B5))
+                        colors = listOf(Color(0xFFEEC0CF), Color(0xFF8358E6))
                     )
                 ),
             contentAlignment = Alignment.CenterStart
