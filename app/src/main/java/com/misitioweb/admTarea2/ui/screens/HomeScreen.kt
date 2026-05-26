@@ -200,7 +200,15 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer
             ),
-            onClick = { navController.navigate(Screen.Favorites.route) }
+            onClick = { 
+                navController.navigate(Screen.Favorites.route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
         ) {
             Row(
                 modifier = Modifier.padding(16.dp),
