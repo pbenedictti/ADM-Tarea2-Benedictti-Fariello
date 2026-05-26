@@ -198,7 +198,7 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                 .fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFFDD6E2) // MaterialTheme.colorScheme.secondaryContainer
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
             ),
             onClick = { navController.navigate(Screen.Favorites.route) }
         ) {
@@ -208,13 +208,13 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
             ) {
                 Surface(
                     shape = RoundedCornerShape(12.dp),
-                    color = Color.White.copy(alpha = 0.5f),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.6f),
                     modifier = Modifier.size(48.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = null,
-                        tint = Color(0xFFE91E63),
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(12.dp)
                     )
                 }
@@ -231,7 +231,11 @@ fun HomeScreen(navController: NavController, viewModel: BookViewModel) {
                         color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                     )
                 }
-                Icon(Icons.Default.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSecondaryContainer)
+                Icon(
+                    imageVector = Icons.Default.ChevronRight, 
+                    contentDescription = null, 
+                    tint = MaterialTheme.colorScheme.onSecondaryContainer
+                )
             }
         }
     }
