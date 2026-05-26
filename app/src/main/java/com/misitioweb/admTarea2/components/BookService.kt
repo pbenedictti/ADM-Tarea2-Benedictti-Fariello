@@ -11,7 +11,6 @@ class BookService : Service() {
         val query = intent?.getStringExtra("query")
         if (query != null) {
             Log.d("BookService", "Searching for: $query")
-            // Simulating a background task
         }
         return START_NOT_STICKY
     }
