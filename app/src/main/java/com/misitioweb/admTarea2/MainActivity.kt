@@ -9,6 +9,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -51,7 +53,7 @@ fun MainApp(viewModel: BookViewModel) {
         bottomBar = {
             NavigationBar {
                 items.forEach { screen ->
-                    val isSelected = currentDestination?.route == screen.route || 
+                    val isSelected = currentDestination?.hierarchy?.any { it.route == screen.route } == true || 
                                     (screen == Screen.Search && currentDestination?.route == Screen.Results.route)
                     NavigationBarItem(
                         icon = { Icon(screen.icon, contentDescription = screen.title) },
@@ -59,7 +61,7 @@ fun MainApp(viewModel: BookViewModel) {
                         selected = isSelected,
                         onClick = {
                             navController.navigate(screen.route) {
-                                popUpTo(navController.graph.startDestinationId) {
+                                popUpTo(navController.graph.findStartDestination().id) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
@@ -70,7 +72,8 @@ fun MainApp(viewModel: BookViewModel) {
                 }
             }
         }
-    ) { innerPadding ->
+    )
+{ innerPadding ->
         NavHost(
             navController = navController,
             startDestination = Screen.Search.route,
