@@ -103,9 +103,6 @@ fun SettingsScreen(navController: androidx.navigation.NavController, viewModel: 
 
             SettingsItem(title = "Versión", subtitle = "1.0.0", icon = Icons.Default.Info)
             Spacer(modifier = Modifier.height(12.dp))
-            SettingsItem(title = "Fuente de datos", subtitle = "OpenLibrary API", icon = Icons.Default.MenuBook)
-            Spacer(modifier = Modifier.height(12.dp))
-            SettingsItem(title = "Proyecto académico", subtitle = "Desarrollo de Aplicaciones Móviles 2026", icon = Icons.Default.Code)
         }
     }
 }
