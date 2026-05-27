@@ -19,6 +19,9 @@ import androidx.navigation.NavController
 import com.misitioweb.admTarea2.R
 import com.misitioweb.admTarea2.ui.Screen
 import kotlinx.coroutines.delay
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.misitioweb.admTarea2.ui.theme.AdmTarea2Theme
 
 @Composable
 fun SplashScreen(navController: NavController) {
@@ -107,6 +110,15 @@ fun SplashScreen(navController: NavController) {
                 color = Color(0xFF673AB7).copy(alpha = 0.3f)
             ) {}
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SplashScreenPreview() {
+    val navController = rememberNavController()
+    AdmTarea2Theme {
+        SplashScreen(navController = navController)
     }
 }
 

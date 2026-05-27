@@ -139,7 +139,7 @@ fun EmptyFavorites(navController: NavController) {
         Spacer(modifier = Modifier.height(32.dp))
         Button(
             onClick = { navController.navigate(Screen.Search.route) },
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
             shape = RoundedCornerShape(24.dp)
         ) {
             Text("Buscar libros", color = MaterialTheme.colorScheme.onPrimary)

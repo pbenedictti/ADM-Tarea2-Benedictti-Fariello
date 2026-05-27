@@ -65,9 +65,7 @@ fun ResultsScreenContent(
         topBar = {
             TopAppBar(
                 title = {
-                    Column {
-                        Text("Volver", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                     }
+                    Text("Volver", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
@@ -86,14 +84,14 @@ fun ResultsScreenContent(
                     .height(200.dp)
                     .background(
                         Brush.verticalGradient(
-                            colors = listOf(Color(0xFFEEC0CF), Color(0xFF8358E6))
+                            colors = listOf(Color(0xFFF2C4CE), Color(0xFF8358E6))
                         )
                     )
             ){
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(24.dp)
+                        .padding(10.dp)
                 ) {
                     Text(
                         text = "Resultado",
@@ -112,6 +110,7 @@ fun ResultsScreenContent(
                         fontSize = 16.sp,
                         color = Color.White
                     )
+
                 }
             }
 
@@ -121,6 +120,7 @@ fun ResultsScreenContent(
                     CircularProgressIndicator()
                 }
             } else {
+
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
